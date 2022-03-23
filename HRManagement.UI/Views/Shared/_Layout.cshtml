@@ -1,0 +1,121 @@
+﻿@{ 
+    int id = ViewContext.HttpContext.Session.GetInt32("ID").Value;
+    string firstName = ViewContext.HttpContext.Session.GetString("FirstName");
+    string lastName = ViewContext.HttpContext.Session.GetString("LastName");
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HRManagement.UI</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/layout-side-bar.css" />
+    <link rel="stylesheet" href="~/css/employee-card.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-overflow fixed-top">
+            <a class="navbar-brand" href="#">Logo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria- expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    
+    <div class="side-bar">
+
+        <!-- Side-bar start -->
+        <div class="sidebar-container fixed-left">
+            <div class="sidebar-logo">
+
+                <!-- employee-card Start -->
+                <div class="align-self-lg-auto card-container" style="background-color:darkgray;">
+                    <div class="card-profile">
+                        <img src="https://i.pinimg.com/736x/91/2c/e1/912ce19bfeadb1e9e2b7cee8f0a4f1bc.jpg" alt="Ammie" style="width:80%">
+                        <h4> @firstName @lastName</h4>
+                        <p class="employee-title">Employee Title</p>
+                        <p>Şirket İsmi</p>
+                    </div>
+                </div>
+                <!-- employee-card End -->
+
+            </div>
+            <ul class="sidebar-navigation">
+                <li class="header">Menu</li>
+                <li>
+                    <a asp-action="Index" asp-controller="Employee">
+                        <i class="fa fa-home" aria-hidden="true"></i> Anasayfa
+                    </a>
+                </li>
+                <li>
+                    <a asp-action="#" asp-controller="#">
+                        <i class="fa fa-home" aria-hidden="true"></i> İzinlerim
+                    </a>
+                </li>
+                <li>
+                    <a asp-action="CreatePermission" asp-controller="Employee" asp-route-id=@id>
+                        <i class="fa fa-tachometer" aria-hidden="true"></i> İzin Ekle
+                    </a>
+                </li>
+                <li class="header">Diğer Menü</li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-users" aria-hidden="true"></i> #
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-cog" aria-hidden="true"></i> #
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> #
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+        <!-- Side-bar start -->
+    </div>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
