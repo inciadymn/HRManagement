@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRManagement.BLL.Abstract
 {
-    public  interface IPermissonBLL: IBaseBLL<Employee>
+    public  interface IPermissionBLL: IBaseBLL<Permission>
     {
 
     }

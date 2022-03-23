@@ -23,20 +23,7 @@ namespace HRManagement.DAL.Concrete.Context
         {
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
             modelBuilder.ApplyConfiguration(new PermissionConfiguration());
-            //modelBuilder.Entity<Employee>().HasData(
-            //    new Employee
-            //    {
-            //        ID = 1,
-            //        FirstName = "İnci",
-            //        LastName = "Adıyaman",
-            //        Email = "inci.adiyaman@hotmail.com",
-            //        Password = "123",
-            //        Address = "İstanbul",
-            //        BirthDay = DateTime.Now,
-            //        PhoneNumber = "055555555",
-            //        Photo = "...",
-            //        StartDate = DateTime.Now
-            //    });
+            
         }
     }
 }
