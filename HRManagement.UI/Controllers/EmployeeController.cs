@@ -1,17 +1,24 @@
 ﻿using HRManagement.BLL.Abstract;
 using HRManagement.BLL.Concrete.ResultServiceBLL;
 using HRManagement.ViewModel.EmployeeViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.IO;
 
 namespace HRManagement.UI.Controllers
 {
     public class EmployeeController : Controller
     {
         IEmployeeBLL employeeBLL;
-        public EmployeeController(IEmployeeBLL employeeBLL)
+        IPermissionBLL permissionBLL;
+        IWebHostEnvironment env;
+        public EmployeeController(IEmployeeBLL employeeBLL, IPermissionBLL permissionBLL, IWebHostEnvironment env)
         {
             this.employeeBLL = employeeBLL;
+            this.permissionBLL = permissionBLL;
+            this.env = env;
         }
 
         // GET: EmployeeController
@@ -23,6 +30,18 @@ namespace HRManagement.UI.Controllers
             HttpContext.Session.SetInt32("ID", employee.Data.Id);
             HttpContext.Session.SetString("FirstName", employee.Data.FirstName);
             HttpContext.Session.SetString("LastName", employee.Data.LastName);
+
+
+            ResultService<List<SummaryPermissionVM>> summaryPermission = permissionBLL.GetSumPermission(id);
+
+            if (!summaryPermission.HasError)
+            {
+                ViewBag.sumPermision = summaryPermission.Data;
+            }
+            else
+            {
+                ViewBag.Message = summaryPermission.Errors[0].ErrorMessage;
+            }
 
             return View(employee.Data);
         }
@@ -37,9 +56,50 @@ namespace HRManagement.UI.Controllers
         [HttpPost]
         public ActionResult CreatePermission(CreateEmployeePermissionVM createEmployeePermissionVM)
         {
+            if (ModelState.IsValid)
+            {
+                string fileName = Path.GetFileName($"{createEmployeePermissionVM.EmployeeID}_" +
+                                                   $"{createEmployeePermissionVM.StartDate.Day}" +
+                                                   $"{createEmployeePermissionVM.StartDate.Month}" +
+                                                   $"{createEmployeePermissionVM.StartDate.Year}" +
+                                                   $"{Path.GetExtension(createEmployeePermissionVM.Report.FileName)}");
+
+                string filePath = Path.Combine(env.ContentRootPath, "UploadedFiles/Reports", fileName);
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    createEmployeePermissionVM.Report.CopyTo(fileStream);
+                }
+
+                ResultService<CreateEmployeePermissionVM> resultService = permissionBLL.Insert(createEmployeePermissionVM, fileName);
+                if (resultService.HasError)
+                {
+                    ViewBag.Message = "***Bitiş tarihi başlangıç tarihinden sonra olmalıdır.";
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
             
             return View(createEmployeePermissionVM);
         }
+
+        //İzinler sayfası
+        [HttpGet]
+        public ActionResult Permission(int id)
+        {
+            ResultService<List<EmployeePermissionVM>> permission = permissionBLL.GetAllPermission(id);
+            if (!permission.HasError)
+            {
+                return View(permission.Data);
+            }
+            else
+            {
+                ViewBag.Message = permission.Errors[0].ErrorMessage;
+                return View();
+            }
+        }
+
 
         // GET: EmployeeController/Details/5
         public ActionResult Details(int id)

@@ -1,13 +1,24 @@
 ﻿.sidebar-container {
-    position: fixed;
-    width: 220px;
+    width: 200px;
     height: 100%;
+    position: fixed;
+    z-index:1;
+    top: 0;
     left: 0;
-    padding-top:50px;
     overflow-x: hidden;
-    overflow-y: auto;
     background: #343A40;
     color: #fff;
+    padding-top: 20px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+        .sidenav a {
+            font-size: 18px;
+        }
 }
 
 .content-container {
@@ -83,3 +94,5 @@
 .content-container {
     padding-left: 220px;
 }
+
+

@@ -13,4 +13,8 @@
     <ProjectReference Include="..\HRManagement.ViewModel\HRManagement.ViewModel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UploadedFiles\Reports\" />
+  </ItemGroup>
+
 </Project>

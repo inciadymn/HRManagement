@@ -4,7 +4,6 @@
     string lastName = ViewContext.HttpContext.Session.GetString("LastName");
 }
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +14,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/layout-side-bar.css" />
     <link rel="stylesheet" href="~/css/employee-card.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header>
@@ -43,9 +43,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled">Disabled</a>
-                    </li>
+                    </li>                
                 </ul>
             </div>
+
+            <button type="button" class="btn btn-secondary btn-lg">Çıkış</button>
         </nav>
     </header>
 
@@ -57,9 +59,11 @@
             <div class="sidebar-logo">
 
                 <!-- employee-card Start -->
-                <div class="align-self-lg-auto card-container" style="background-color:darkgray;">
+                <div class="align-self-lg-auto card-container">
                     <div class="card-profile">
-                        <img src="https://i.pinimg.com/736x/91/2c/e1/912ce19bfeadb1e9e2b7cee8f0a4f1bc.jpg" alt="Ammie" style="width:80%">
+                        <div class="profile-pic">
+                            <img src="https://i.pinimg.com/736x/91/2c/e1/912ce19bfeadb1e9e2b7cee8f0a4f1bc.jpg" alt="Ammie">
+                        </div>
                         <h4> @firstName @lastName</h4>
                         <p class="employee-title">Employee Title</p>
                         <p>Şirket İsmi</p>
@@ -76,21 +80,16 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-action="#" asp-controller="#">
-                        <i class="fa fa-home" aria-hidden="true"></i> İzinlerim
+                    <a asp-action="Permission" asp-controller="Employee">
+                        <i class="fa fa-flag" aria-hidden="true"></i> İzinlerim
                     </a>
                 </li>
                 <li>
                     <a asp-action="CreatePermission" asp-controller="Employee" asp-route-id=@id>
-                        <i class="fa fa-tachometer" aria-hidden="true"></i> İzin Ekle
+                        <i class="fa fa-plus" aria-hidden="true"></i> İzin Ekle
                     </a>
                 </li>
                 <li class="header">Diğer Menü</li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-users" aria-hidden="true"></i> #
-                    </a>
-                </li>
                 <li>
                     <a href="#">
                         <i class="fa fa-cog" aria-hidden="true"></i> #
@@ -104,7 +103,7 @@
             </ul>
 
         </div>
-        <!-- Side-bar start -->
+        <!-- Side-bar end -->
     </div>
 
     <div class="container">
