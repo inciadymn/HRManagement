@@ -5,6 +5,8 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 
+    int id = ViewContext.HttpContext.Session.GetInt32("ID").Value;
+
     //var message = ViewBag.Message;
 }
 
@@ -32,7 +34,7 @@
         <div class="form-group top">
             <div class="invisible item">
                 <label asp-for="EmployeeID">
-                    <input asp-for="EmployeeID" value=@ViewBag.Data class="form-control" />
+                    <input asp-for="EmployeeID" value=@id class="form-control" />
                 </label>
             </div>
 

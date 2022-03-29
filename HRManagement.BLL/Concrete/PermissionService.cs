@@ -23,6 +23,13 @@ namespace HRManagement.BLL.Concrete
             ResultService<CreateEmployeePermissionVM> permissionResult = new ResultService<CreateEmployeePermissionVM>();
             try
             {
+                if (createEmployeePermissionVM.StartDate.Date >= createEmployeePermissionVM.FinishDate.Date)
+                {
+                    //throw new Exception("İzin başlangıç ve bitiş tarihi aynı olmamalıdır.");
+                    permissionResult.AddError("Tarih uyumsuzluğu", "İzin başlangıç ve bitiş tarihi aynı olmamalıdır.");
+                    return permissionResult;
+                }
+
                 Permission permission = permissionRepository.Add(new Permission
                 {
                     EmployeeID = createEmployeePermissionVM.EmployeeID,
@@ -31,7 +38,7 @@ namespace HRManagement.BLL.Concrete
                     StartDate = createEmployeePermissionVM.StartDate,
                     PermissionType = createEmployeePermissionVM.PermissionType,
                     ReportUrl = fileName,
-                    RequestDate = createEmployeePermissionVM.RequestDate,
+                    RequestDate = DateTime.Now,
                     PermitStatus = Model.Enums.PermitStatus.Onaylanmamis
 
                 });

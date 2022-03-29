@@ -58,17 +58,23 @@ namespace HRManagement.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                string fileName = Path.GetFileName($"{createEmployeePermissionVM.EmployeeID}_" +
-                                                   $"{createEmployeePermissionVM.StartDate.Day}" +
-                                                   $"{createEmployeePermissionVM.StartDate.Month}" +
-                                                   $"{createEmployeePermissionVM.StartDate.Year}" +
-                                                   $"{Path.GetExtension(createEmployeePermissionVM.Report.FileName)}");
+                string fileName = null;
 
-                string filePath = Path.Combine(env.ContentRootPath, "UploadedFiles/Reports", fileName);
-                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                if (createEmployeePermissionVM.Report != null)
                 {
-                    createEmployeePermissionVM.Report.CopyTo(fileStream);
+                    fileName = Path.GetFileName($"{createEmployeePermissionVM.EmployeeID}_" +
+                                                $"{createEmployeePermissionVM.StartDate.Day}" +
+                                                $"{createEmployeePermissionVM.StartDate.Month}" +
+                                                $"{createEmployeePermissionVM.StartDate.Year}" +
+                                                $"{Path.GetExtension(createEmployeePermissionVM.Report.FileName)}");
+
+                    string filePath = Path.Combine(env.ContentRootPath, "UploadedFiles/Reports", fileName);
+                    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        createEmployeePermissionVM.Report.CopyTo(fileStream);
+                    }
                 }
+             
 
                 ResultService<CreateEmployeePermissionVM> resultService = permissionBLL.Insert(createEmployeePermissionVM, fileName);
                 if (resultService.HasError)
