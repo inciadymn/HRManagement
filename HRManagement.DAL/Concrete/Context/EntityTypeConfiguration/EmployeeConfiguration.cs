@@ -53,11 +53,11 @@ namespace HRManagement.DAL.Concrete.Context.EntityTypeConfiguration
                 ID = 1,
                 FirstName = "İnci",
                 LastName = "Adıyaman",
-                Email = "inci.adiyaman@hotmail.com",
+                Email = "inci.adiyaman@hrmanagement.com",
                 Password = "123",
-                Address = "İstanbul",
+                Address = "Ayrancı mahallesi Gül sokak Kat:3 No:11 Maltepe/İstanbul",
                 BirthDay = DateTime.Now,
-                PhoneNumber = "055555555",
+                PhoneNumber = "05551234567",
                 Photo = "...",
                 StartDate = DateTime.Now
             });

@@ -11,6 +11,7 @@ namespace HRManagement.ViewModel.EmployeeViewModels
     {
         public int PermissionID { get; set; }
         public DateTime RequestDate { get; set; }
+        public int NumberOfDaysOff { get; set; }
         public PermitStatus PermitStatus { get; set; }
         public PermissionType PermissionType { get; set; }
     }
