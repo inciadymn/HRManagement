@@ -18,11 +18,13 @@ namespace HRManagement.DAL.Concrete.Context
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Permission> Permission { get; set; }
+        public DbSet<Advance> Advances { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
             modelBuilder.ApplyConfiguration(new PermissionConfiguration());
+            modelBuilder.ApplyConfiguration(new AdvanceConfiguration());
             
         }
     }

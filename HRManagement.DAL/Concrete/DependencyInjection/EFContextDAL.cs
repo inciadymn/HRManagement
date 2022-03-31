@@ -17,6 +17,7 @@ namespace HRManagement.DAL.Concrete.DependencyInjection
             services.AddDbContext<HRManagementDbContext>();
             services.AddScoped<IEmployeeDAL, EmployeeRepository>();
             services.AddScoped<IPermissionDAL, PermissionRepository>();
+            services.AddScoped<IAdvanceDAL, AdvanceRepository>();
         }
     }
 }

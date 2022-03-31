@@ -12,6 +12,7 @@ namespace HRManagement.Model.Entities
         public Employee()
         {
             Permissions = new HashSet<Permission>();
+            Advances = new HashSet<Advance>();
         }
 
         public string FirstName { get; set; }
@@ -28,5 +29,6 @@ namespace HRManagement.Model.Entities
         public string Address { get; set; }
 
         public ICollection<Permission> Permissions { get; set; }
+        public ICollection<Advance> Advances { get; set; }
     }
 }
