@@ -32,24 +32,24 @@ namespace HRManagement.BLL.Concrete
                 //    return advanceResult;
                 //}
 
-                Advance advance = advanceRepository.Add(new Advance
-                {
-                    EmployeeID = createEmployeeAdvanceVM.EmployeeID,
-                    Description = createEmployeeAdvanceVM.Description,
-                    Price = createEmployeeAdvanceVM.Price,
-                    AdvanceType = createEmployeeAdvanceVM.AdvanceType,
-                    RequestDate = DateTime.Now,
-                    PermitStatus = Model.Enums.PermitStatus.Onaylanmamis
+                //Advance advance = advanceRepository.Add(new Advance
+                //{
+                //    EmployeeID = createEmployeeAdvanceVM.EmployeeID,
+                //    Description = createEmployeeAdvanceVM.Description,
+                //    Price = createEmployeeAdvanceVM.Price,
+                //    AdvanceType = createEmployeeAdvanceVM.AdvanceType,
+                //    RequestDate = DateTime.Now,
+                //    PermitStatus = Model.Enums.PermitStatus.Onaylanmamis
 
-                });
+                //});
 
 
-                if (advance == null)
-                {
-                    //throw new Exception("ekleme başarılı değil");
-                    advanceResult.AddError("Ekleme Hatasi", "ekleme başarılı değil");
-                    return advanceResult;
-                }
+                //if (advance == null)
+                //{
+                //    //throw new Exception("ekleme başarılı değil");
+                //    advanceResult.AddError("Ekleme Hatasi", "ekleme başarılı değil");
+                //    return advanceResult;
+                //}
             }
             catch (Exception ex)
             {

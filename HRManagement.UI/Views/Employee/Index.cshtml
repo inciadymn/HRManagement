@@ -30,34 +30,34 @@
         <div style="margin-top:80px; margin-left:140px; width:600px; height:275px; background-color:#343A40; color:white">
             <div style="padding-left:50px; padding-top:50px;">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label>Ad Soyad :</label>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <p>@Model.FirstName @Model.LastName</p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label>E-mail :</label>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <p>@Model.Email</p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label>Telefon Numarası :</label>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <p>@Model.PhoneNumber</p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label>Adres :</label>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <p>@Model.Address</p>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
 
         <div>
 
-            <!-- Permisson List Table Start -->
+            <!-- Permisson Sum. List Table Start -->
             <div style="margin-top:50px;">
                 <table class="table table-dark">
                     <thead>
@@ -92,7 +92,34 @@
                     </tbody>
                 </table>
             </div>
-            <!-- Permisson List Table End -->
+            <!-- Permisson Sum. List Table End -->
+
+            <!-- Advance Sum. List Table Start -->
+            <div style="margin-top:50px;">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Avans Kodu</th>
+                            <th scope="col">Avans Tipi</th>
+                            <th scope="col">Talep Tarihi</th>
+                            <th scope="col">Onay Durumu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in sum)
+                        {
+                        <tr>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- Advance Sum. List Table End -->
 
         </div>
     </div>

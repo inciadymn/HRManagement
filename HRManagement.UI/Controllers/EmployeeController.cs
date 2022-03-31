@@ -14,6 +14,7 @@ namespace HRManagement.UI.Controllers
         IEmployeeBLL employeeBLL;
         IPermissionBLL permissionBLL;
         IWebHostEnvironment env;
+        IAdvanceBLL advanceBLL;
         public EmployeeController(IEmployeeBLL employeeBLL, IPermissionBLL permissionBLL, IWebHostEnvironment env)
         {
             this.employeeBLL = employeeBLL;
@@ -46,6 +47,7 @@ namespace HRManagement.UI.Controllers
             return View(employee.Data);
         }
 
+        //İzin Ekle Sayfası
         [HttpGet]
         public ActionResult CreatePermission(int id)
         {
@@ -105,6 +107,39 @@ namespace HRManagement.UI.Controllers
                 return View();
             }
         }
+
+        //Avans Ekle Sayfası
+        [HttpGet]
+        public ActionResult CreateAdvance(int id)
+        {
+            ViewBag.AdvanceID = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateAdvance(CreateEmployeeAdvanceVM createEmployeeAdvanceVM)
+        {
+            return View();
+            //İçi Yazılacak
+        }
+
+        //Avanslar Sayfası
+        [HttpGet]
+        public ActionResult Advance(int id)
+        {
+            //ResultService<List<EmployeeAdvanceVM>> advance = advanceBLL.GetAllAdvance(id);
+            //if (!advance.HasError)
+            //{
+            //    return View(advance.Data);
+            //}
+            //else
+            //{
+            //    ViewBag.Message = advance.Errors[0].ErrorMessage;
+            //    return View();
+            //}
+            return View();
+        }
+
 
 
         // GET: EmployeeController/Details/5

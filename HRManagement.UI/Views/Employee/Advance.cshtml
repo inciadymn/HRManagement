@@ -1,0 +1,57 @@
+﻿@model List<EmployeeAdvanceVM>
+
+@{
+    ViewData["Title"] = "Advance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .avans-ekle{
+        color:snow;
+    }
+</style>
+
+<body>
+    <!-- Permisson List Table Start -->
+        <div style="margin-top:200px; margin-left:150px;">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Avans Kodu</th> <!--id-->
+                        <th scope="col">Talep Tarihi</th> 
+                        <th scope="col">Avans Tipi</th>
+                        <th scope="col">fiyat</th>                       
+                        <th scope="col">Açıklama</th>
+                        <th scope="col">İzin Durumu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                        </tr>
+    @*              @foreach (EmployeeAdvanceVM item in Model)
+                    {
+                    }       *@
+                </tbody>
+            </table>
+
+            <div class="item">
+                <button class="btn btn-primary btn-lg" type="submit"><a asp-action="CreateAdvance" asp-controller="Employee" class="avans-ekle">Avans Ekle</a></button>
+            </div>
+        </div>
+    <!-- Permisson List Table End -->
+
+    <!-- İzin Ekle butonu Start-->
+    <!-- Gerek var mı? Zaten Side-bardan dinamik geçiş var-->
+    <!-- İzin Ekle butonu End-->
+    @*bootstrapv4*@
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C  +OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/ reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-  VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+</body>
+

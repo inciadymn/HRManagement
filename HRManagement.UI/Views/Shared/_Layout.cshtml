@@ -1,4 +1,10 @@
-﻿@{ 
+﻿const { Button } = require("../../wwwroot/lib/bootstrap/dist/js/bootstrap.bundle");
+
+const { type } = require("jquery");
+
+const { type } = require("jquery");
+
+@{ 
     int id = ViewContext.HttpContext.Session.GetInt32("ID").Value;
     string firstName = ViewContext.HttpContext.Session.GetString("FirstName");
     string lastName = ViewContext.HttpContext.Session.GetString("LastName");
@@ -24,7 +30,7 @@
                     aria-controls="navbarSupportedContent" aria- expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+            @*
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
@@ -46,8 +52,10 @@
                     </li>                
                 </ul>
             </div>
-
-            <button type="button" class="btn btn-secondary btn-lg">Çıkış</button>
+            *@
+            
+            <button type="button" class="btn btn-secondary btn-lg" style="margin-left:1700px" onclick="window.close();">Çıkış</button>
+            
         </nav>
     </header>
 
@@ -85,9 +93,22 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-action="CreatePermission" asp-controller="Employee" asp-route-id=@id>
-                        <i class="fa fa-plus" aria-hidden="true"></i> İzin Ekle
+                    <a asp-action="Advance" asp-controller="Employee">
+                        <i class="fa fa-flag" aria-hidden="true"></i> Avanslarım
                     </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Taleplerim
+                    </a>
+                    <div class="dropdown-menu" style="background-color:black">
+                        <a asp-action="CreatePermission" asp-controller="Employee" asp-route-id=@id>
+                            <i class="fa fa-plus" aria-hidden="true"></i> İzin Ekle
+                        </a>
+                         <a asp-action="CreateAdvance" asp-controller="Employee" asp-route-id=#>
+                            <i class="fa fa-plus" aria-hidden="true"></i> Avans Ekle
+                        </a>
+                    </div>
                 </li>
                 <li class="header">Diğer Menü</li>
                 <li>
@@ -111,7 +132,6 @@
             @RenderBody()
         </main>
     </div>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
