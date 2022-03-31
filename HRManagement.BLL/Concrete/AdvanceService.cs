@@ -1,13 +1,11 @@
 ﻿using HRManagement.BLL.Abstract;
 using HRManagement.BLL.Concrete.ResultServiceBLL;
 using HRManagement.DAL.Abstract;
-using HRManagement.DAL.Migrations;
+using HRManagement.Model.Entities;
 using HRManagement.ViewModel.EmployeeViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRManagement.BLL.Concrete
 {
@@ -19,37 +17,38 @@ namespace HRManagement.BLL.Concrete
             this.advanceRepository = advanceRepository;
         }
 
-        public ResultService<CreateEmployeeAdvanceVM> Insert(CreateEmployeeAdvanceVM createEmployeeAdvanceVM)
+        public ResultService<CreateEmployeeAdvanceVM> Insert(CreateEmployeeAdvanceVM createEmployeeAdvanceVM, double employeeSalary)
         {
             ResultService<CreateEmployeeAdvanceVM> advanceResult = new ResultService<CreateEmployeeAdvanceVM>();
             try
             {
-                //Salary kontrolü yap !!!
-                //if (createEmployeeAdvanceVM.StartDate.Date >= createEmployeeAdvanceVM.FinishDate.Date)
-                //{
-                //    //throw new Exception("İzin başlangıç ve bitiş tarihi aynı olmamalıdır.");
-                //    advanceResult.AddError("Tarih uyumsuzluğu", "İzin başlangıç ve bitiş tarihi aynı olmamalıdır.");
-                //    return advanceResult;
-                //}
+                if (createEmployeeAdvanceVM.AdvanceType == Model.Enums.AdvanceType.Salary)
+                {
+                    if (createEmployeeAdvanceVM.Price > employeeSalary * 0.3)
+                    {
+                        advanceResult.AddError("Yanlış avans talebi", "En fazla maaşınızın %30'unu talep edebilirsiniz.");
+                        return advanceResult;
+                    }
+                }
 
-                //Advance advance = advanceRepository.Add(new Advance
-                //{
-                //    EmployeeID = createEmployeeAdvanceVM.EmployeeID,
-                //    Description = createEmployeeAdvanceVM.Description,
-                //    Price = createEmployeeAdvanceVM.Price,
-                //    AdvanceType = createEmployeeAdvanceVM.AdvanceType,
-                //    RequestDate = DateTime.Now,
-                //    PermitStatus = Model.Enums.PermitStatus.Onaylanmamis
+                Advance advance = advanceRepository.Add(new Advance
+                {
+                    EmployeeID = createEmployeeAdvanceVM.EmployeeID,
+                    Description = createEmployeeAdvanceVM.Description,
+                    Price = createEmployeeAdvanceVM.Price,
+                    AdvanceType = createEmployeeAdvanceVM.AdvanceType,
+                    //RequestDate = DateTime.Now,
+                    PermitStatus = Model.Enums.PermitStatus.Onaylanmamis
 
-                //});
+                });
 
 
-                //if (advance == null)
-                //{
-                //    //throw new Exception("ekleme başarılı değil");
-                //    advanceResult.AddError("Ekleme Hatasi", "ekleme başarılı değil");
-                //    return advanceResult;
-                //}
+                if (advance == null)
+                {
+                    //throw new Exception("ekleme başarılı değil");
+                    advanceResult.AddError("Ekleme Hatasi", "ekleme başarılı değil");
+                    return advanceResult;
+                }
             }
             catch (Exception ex)
             {

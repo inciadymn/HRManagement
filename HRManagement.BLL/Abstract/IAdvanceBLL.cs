@@ -11,7 +11,7 @@ namespace HRManagement.BLL.Abstract
 {
     public interface IAdvanceBLL:IBaseBLL<Advance>
     {
-         ResultService<CreateEmployeeAdvanceVM> Insert(CreateEmployeeAdvanceVM createEmployeeAdvanceVM);
+         ResultService<CreateEmployeeAdvanceVM> Insert(CreateEmployeeAdvanceVM createEmployeeAdvanceVM, double employeeSalary);
         ResultService<List<EmployeeAdvanceVM>> GetAllAdvance(int id);
         ResultService<List<SummaryAdvanceVM>> GetSumAdvance(int id);
     }

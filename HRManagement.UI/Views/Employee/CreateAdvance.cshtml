@@ -21,7 +21,10 @@
 	.item {
 		margin-top:20px;
 		margin-bottom: 20px;
-	}    
+	}
+    .hataMesajıKırmızı {
+        color: red;
+    }
 </style>
     
 <body>
@@ -36,15 +39,21 @@
 
             <div class="item">
                 <label asp-for="RequestDate"> <b>Talep Tarihi</b> </label>
-                <input asp-for="RequestDate" type="date" class="form-control" required />
+                <input asp-for="RequestDate" type="text" value="@DateTime.Now" disabled class="form-control" required />
                 <span asp-validation-for="RequestDate"></span>
             </div>
 
             <div class="item">
                 <label asp-for="Price"> <b>Fiyat</b> </label>
-                <input asp-for="Price" type="date" class="form-control" required />
+                <input asp-for="Price" type="number" class="form-control" required />
                 <span asp-validation-for="Price"></span>
             </div>
+
+            @if (ViewBag.Message != null)
+            {
+                <h6 class="hataMesajıKırmızı">@ViewBag.Message</h6>
+            }
+
             <div class="item">
                 <label asp-for="Description"><b>Açıklama</b></label>
                 <textarea asp-for="Description" class="form-control" placeholder="Açıklama giriniz..."></textarea>

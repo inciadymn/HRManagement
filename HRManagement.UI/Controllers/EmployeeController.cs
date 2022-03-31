@@ -15,10 +15,11 @@ namespace HRManagement.UI.Controllers
         IPermissionBLL permissionBLL;
         IWebHostEnvironment env;
         IAdvanceBLL advanceBLL;
-        public EmployeeController(IEmployeeBLL employeeBLL, IPermissionBLL permissionBLL, IWebHostEnvironment env)
+        public EmployeeController(IEmployeeBLL employeeBLL, IPermissionBLL permissionBLL, IAdvanceBLL advanceBLL, IWebHostEnvironment env)
         {
             this.employeeBLL = employeeBLL;
             this.permissionBLL = permissionBLL;
+            this.advanceBLL = advanceBLL;
             this.env = env;
         }
 
@@ -119,8 +120,23 @@ namespace HRManagement.UI.Controllers
         [HttpPost]
         public ActionResult CreateAdvance(CreateEmployeeAdvanceVM createEmployeeAdvanceVM)
         {
-            return View();
-            //İçi Yazılacak
+            if (ModelState.IsValid)
+            {
+                int id = createEmployeeAdvanceVM.EmployeeID;
+                double employeeSalary = employeeBLL.GetEmployeeSalary(id);
+
+                ResultService<CreateEmployeeAdvanceVM> createAdvance = advanceBLL.Insert(createEmployeeAdvanceVM, employeeSalary);
+                if (createAdvance.HasError)
+                {
+                    ViewBag.Message = "***En fazla maaşınızın %30'unu talep edebilirsiniz.";
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            return View(createEmployeeAdvanceVM);
         }
 
         //Avanslar Sayfası
@@ -139,8 +155,6 @@ namespace HRManagement.UI.Controllers
             //}
             return View();
         }
-
-
 
         // GET: EmployeeController/Details/5
         public ActionResult Details(int id)

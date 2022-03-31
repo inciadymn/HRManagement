@@ -12,5 +12,6 @@ namespace HRManagement.BLL.Abstract
     public interface IEmployeeBLL : IBaseBLL<Employee>
     {
         ResultService<SingleEmployeeVM> GetEmployee(int id);
+       double GetEmployeeSalary(int id);
     }
 }

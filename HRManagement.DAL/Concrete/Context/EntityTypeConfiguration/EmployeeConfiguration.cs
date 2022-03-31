@@ -59,7 +59,11 @@ namespace HRManagement.DAL.Concrete.Context.EntityTypeConfiguration
                 BirthDay = DateTime.Now,
                 PhoneNumber = "05551234567",
                 Photo = "...",
-                StartDate = DateTime.Now
+                StartDate = DateTime.Now,
+                Department="Teknoloji",
+                Salary = 10000,
+                Title ="Developer"
+                
             });
         }
     }

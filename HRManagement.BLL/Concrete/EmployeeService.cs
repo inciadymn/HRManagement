@@ -4,10 +4,6 @@ using HRManagement.DAL.Abstract;
 using HRManagement.Model.Entities;
 using HRManagement.ViewModel.EmployeeViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRManagement.BLL.Concrete
 {
@@ -23,7 +19,7 @@ namespace HRManagement.BLL.Concrete
         public ResultService<SingleEmployeeVM> GetEmployee(int id)
         {
             ResultService<SingleEmployeeVM> result = new ResultService<SingleEmployeeVM>();
-            Employee emp=employeeDAL.Get(a => a.ID == id);
+            Employee emp = employeeDAL.Get(a => a.ID == id);
             if (emp == null)
             {
                 result.AddError("Null hatası", "id ile uyumlu employee yok");
@@ -38,9 +34,22 @@ namespace HRManagement.BLL.Concrete
                 PhoneNumber = emp.PhoneNumber,
                 Photo = emp.Photo,
                 StartDate = emp.StartDate,
-                Id=emp.ID
+                Id = emp.ID,
+                Title = emp.Title,
+                Department = emp.Department
             };
             return result;
+        }
+
+         public double GetEmployeeSalary(int id)
+        {
+            Employee emp = employeeDAL.Get(a => a.ID == id);
+            if (emp == null)
+            {
+                throw new Exception("Boş geçilemez");
+            }
+            
+            return emp.Salary;
         }
     }
 }
