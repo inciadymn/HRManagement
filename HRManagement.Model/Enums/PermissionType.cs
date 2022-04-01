@@ -8,14 +8,14 @@ namespace HRManagement.Model.Enums
 {
     public enum PermissionType
     {
-        YillikIzin = 1,
-        DogumIzni = 2,
-        BabalikIzni = 3,
-        EvlilikIzni=4,
-        HastalikIzni=5,
-        VefatIzni=6,
-        UcretsizIzin = 7,
-        TasinmaIzni=8,
-        Diger=9
+        Yıllık = 1,
+        Doğum = 2,
+        Babalık = 3,
+        Evlilik=4,
+        Hastalık=5,
+        Vefat=6,
+        Ücretsiz = 7,
+        Taşınma=8,
+        Diğer=9
     }
 }

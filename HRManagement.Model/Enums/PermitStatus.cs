@@ -8,8 +8,8 @@ namespace HRManagement.Model.Enums
 {
     public enum PermitStatus
     {
-        Onayli=1,  
-        Onaylanmamis = 2, 
-        OnayBekleyen=3  
+        Onaylı=1,  
+        Onaylanmamış = 2, 
+        Bekleyen=3  
     }
 }

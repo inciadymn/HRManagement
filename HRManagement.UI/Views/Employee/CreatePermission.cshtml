@@ -41,13 +41,13 @@
             <div class="item">
                 <label asp-for="StartDate"> <b>Başlangıç Tarihi</b> </label>
                 <input asp-for="StartDate" type="date" class="form-control" required />
-                <span asp-validation-for="StartDate"></span>
+                <span asp-validation-for="StartDate" class="text-danger" ></span>
             </div>
 
             <div class="item">
                 <label asp-for="FinishDate"> <b>Bitiş Tarihi</b> </label>
                 <input asp-for="FinishDate" type="date" class="form-control" required />
-                <span asp-validation-for="FinishDate"></span>
+                <span asp-validation-for="FinishDate" class="text-danger"></span>
             </div>
 
             @if (ViewBag.Message != null)
@@ -58,7 +58,7 @@
             <div class="item">
                 <label asp-for="Description"><b>Açıklama</b></label>
                 <textarea asp-for="Description" class="form-control" placeholder="Açıklama giriniz..."></textarea>
-                <span asp-validation-for="Description"></span>
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
             @*<label asp-for="PermissionType"></label>
@@ -76,7 +76,7 @@
             <div class="item">
                 <label asp-for="PermissionType"> <b>İzin Türü</b> </label>
                 <select asp-for="PermissionType" asp-items="Html.GetEnumSelectList<PermissionType>()" class="form-control"> </select>
-                <span asp-validation-for="PermissionType"></span>
+                <span asp-validation-for="PermissionType" class="text-danger"></span>
             </div>
 
             <div class="item">

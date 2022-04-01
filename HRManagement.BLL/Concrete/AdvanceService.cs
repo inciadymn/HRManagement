@@ -22,7 +22,7 @@ namespace HRManagement.BLL.Concrete
             ResultService<CreateEmployeeAdvanceVM> advanceResult = new ResultService<CreateEmployeeAdvanceVM>();
             try
             {
-                if (createEmployeeAdvanceVM.AdvanceType == Model.Enums.AdvanceType.Salary)
+                if (createEmployeeAdvanceVM.AdvanceType == Model.Enums.AdvanceType.Maaş)
                 {
                     if (createEmployeeAdvanceVM.Price > employeeSalary * 0.3)
                     {
@@ -37,8 +37,8 @@ namespace HRManagement.BLL.Concrete
                     Description = createEmployeeAdvanceVM.Description,
                     Price = createEmployeeAdvanceVM.Price,
                     AdvanceType = createEmployeeAdvanceVM.AdvanceType,
-                    //RequestDate = DateTime.Now,
-                    PermitStatus = Model.Enums.PermitStatus.Onaylanmamis
+                    RequestDate = DateTime.Now,
+                    PermitStatus = Model.Enums.PermitStatus.Onaylanmamış
 
                 });
 

@@ -37,7 +37,7 @@ namespace HRManagement.BLL.Concrete
                     PermissionType = createEmployeePermissionVM.PermissionType,
                     ReportUrl = fileName,
                     RequestDate = DateTime.Now,
-                    PermitStatus = Model.Enums.PermitStatus.Onaylanmamis
+                    PermitStatus = Model.Enums.PermitStatus.Onaylanmamış
 
                 });
 

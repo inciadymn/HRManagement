@@ -8,6 +8,6 @@ namespace HRManagement.Model.Enums
 {
     public enum AdvanceType
     {
-       Business,Salary
+       İş,Maaş
     }
 }

@@ -16,7 +16,7 @@ namespace HRManagement.ViewModel.EmployeeViewModels
         [Required(ErrorMessage ="Zorunlu Alan")]
         [DataType(DataType.Date,ErrorMessage ="Lütfen tarih giriniz.")]
         [Display(Name = "Başlangıç Tarihi")]
-        [PermissionDateControl(ErrorMessage ="Geçerli bir tarih giriniz.")]
+        [PermissionDateControl(ErrorMessage ="Lütfen ileri bir tarih giriniz.")]
         public DateTime StartDate { get; set; } //izin başlangıcı
 
         [Required(ErrorMessage = "Zorunlu Alan")]

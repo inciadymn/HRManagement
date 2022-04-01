@@ -32,6 +32,8 @@ namespace HRManagement.UI.Controllers
             HttpContext.Session.SetInt32("ID", employee.Data.Id);
             HttpContext.Session.SetString("FirstName", employee.Data.FirstName);
             HttpContext.Session.SetString("LastName", employee.Data.LastName);
+            HttpContext.Session.SetString("Title", employee.Data.Title);
+            HttpContext.Session.SetString("Department", employee.Data.Department);
 
 
             ResultService<List<SummaryPermissionVM>> summaryPermission = permissionBLL.GetSumPermission(id);
@@ -43,6 +45,17 @@ namespace HRManagement.UI.Controllers
             else
             {
                 ViewBag.Message = summaryPermission.Errors[0].ErrorMessage;
+            }
+
+            ResultService<List<SummaryAdvanceVM>> summaryAdvance = advanceBLL.GetSumAdvance(id);
+
+            if (!summaryAdvance.HasError)
+            {
+                ViewBag.sumAdvance = summaryAdvance.Data;
+            }
+            else
+            {
+                ViewBag.MessageAdv = summaryAdvance.Errors[0].ErrorMessage;
             }
 
             return View(employee.Data);
@@ -143,17 +156,16 @@ namespace HRManagement.UI.Controllers
         [HttpGet]
         public ActionResult Advance(int id)
         {
-            //ResultService<List<EmployeeAdvanceVM>> advance = advanceBLL.GetAllAdvance(id);
-            //if (!advance.HasError)
-            //{
-            //    return View(advance.Data);
-            //}
-            //else
-            //{
-            //    ViewBag.Message = advance.Errors[0].ErrorMessage;
-            //    return View();
-            //}
-            return View();
+            ResultService<List<EmployeeAdvanceVM>> advance = advanceBLL.GetAllAdvance(id);
+            if (!advance.HasError)
+            {
+                return View(advance.Data);
+            }
+            else
+            {
+                ViewBag.Message = advance.Errors[0].ErrorMessage;
+                return View();
+            }
         }
 
         // GET: EmployeeController/Details/5
