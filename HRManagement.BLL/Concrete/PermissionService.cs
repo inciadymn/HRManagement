@@ -91,7 +91,7 @@ namespace HRManagement.BLL.Concrete
 
             try
             {
-                List<SummaryPermissionVM> sumPermissions = permissionRepository.GetAll(a => a.EmployeeID == id).OrderByDescending(a => a.RequestDate).Take(3)
+                List<SummaryPermissionVM> sumPermissions = permissionRepository.GetAll(a => a.EmployeeID == id).OrderByDescending(a => a.RequestDate)
                                                                 .Select(sum => new SummaryPermissionVM
                                                                 {
                                                                     PermissionID = sum.ID,

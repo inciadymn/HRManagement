@@ -62,7 +62,7 @@ namespace HRManagement.DAL.Concrete.Context.EntityTypeConfiguration
                 StartDate = DateTime.Now,
                 Department="Teknoloji",
                 Salary = 10000,
-                Title ="Developer"
+                Title ="Yazılım Uzmanı"
                 
             });
         }

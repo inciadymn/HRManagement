@@ -91,7 +91,7 @@ namespace HRManagement.BLL.Concrete
 
             try
             {
-                List<SummaryAdvanceVM> sumAdvances = advanceRepository.GetAll(a => a.EmployeeID == id).OrderByDescending(a => a.RequestDate).Take(5)
+                List<SummaryAdvanceVM> sumAdvances = advanceRepository.GetAll(a => a.EmployeeID == id).OrderByDescending(a => a.RequestDate)
                                                                 .Select(sum => new SummaryAdvanceVM
                                                                 {
                                                                     AdvanceID = sum.ID,
