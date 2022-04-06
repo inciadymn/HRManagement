@@ -61,6 +61,7 @@ namespace HRManagement.UI.Controllers
             return View(employee.Data);
         }
 
+        
         //İzin Ekle Sayfası
         [HttpGet]
         public ActionResult CreatePermission(int id)
