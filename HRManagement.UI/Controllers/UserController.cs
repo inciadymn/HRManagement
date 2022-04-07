@@ -19,12 +19,6 @@ namespace HRManagement.UI.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            if (HttpContext.Session.GetInt32("ID").HasValue)
-            {
-                int id = HttpContext.Session.GetInt32("ID").Value;
-
-                return RedirectToAction(nameof(Index), "Employee", new { id });
-            }
 
             return View();
         }

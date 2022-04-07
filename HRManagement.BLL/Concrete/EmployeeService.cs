@@ -3,6 +3,7 @@ using HRManagement.BLL.Concrete.ResultServiceBLL;
 using HRManagement.DAL.Abstract;
 using HRManagement.Model.Entities;
 using HRManagement.ViewModel.EmployeeViewModels;
+using HRManagement.ViewModel.UserViewModels;
 using System;
 
 namespace HRManagement.BLL.Concrete
@@ -22,7 +23,7 @@ namespace HRManagement.BLL.Concrete
             Employee emp = employeeDAL.Get(a => a.Email == email && a.Password == password);
             if (emp == null)
             {
-                result.AddError("Login Hatası", "Böyle bir kullanıcı bulunamadı");
+                result.AddError("Login Hatası", "***Böyle bir kullanıcı bulunamadı");
                 return result;
             }
             result.Data = new SingleEmployeeVM()
@@ -78,5 +79,40 @@ namespace HRManagement.BLL.Concrete
 
             return emp.Salary;
         }
+
+        //public bool CheckPassword(string password)
+        //{
+        //    bool isCharUpper = false;
+        //    bool isCharLower = false;
+        //    bool isNumber = false;
+        //    bool isPasswordLength = false;
+        //    if (password.Length > 6)
+        //    {
+        //        isPasswordLength = true;
+        //    }
+        //    foreach (char item in password)
+        //    {
+        //        if (char.IsUpper(item))
+        //        {
+        //            isCharUpper = true;
+        //        }
+        //        else if (char.IsLower(item))
+        //        {
+        //            isCharLower = true;
+        //        }
+        //        else if (char.IsDigit(item))
+        //        {
+        //            isNumber = true;
+        //        }
+
+        //    }
+
+        //    if (!isCharUpper || !isCharLower || !isNumber || !isPasswordLength)
+        //    {
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
     }
 }
