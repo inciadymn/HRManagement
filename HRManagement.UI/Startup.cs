@@ -48,7 +48,7 @@ namespace HRManagement.UI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Employee}/{action=Index}/{id=1}");
+                    pattern: "{controller=User}/{action=Login}/{id?}");
             });
         }
     }

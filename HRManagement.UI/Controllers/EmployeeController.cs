@@ -1,6 +1,7 @@
 ﻿using HRManagement.BLL.Abstract;
 using HRManagement.BLL.Concrete.ResultServiceBLL;
 using HRManagement.ViewModel.EmployeeViewModels;
+using HRManagement.ViewModel.UserViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,13 +28,13 @@ namespace HRManagement.UI.Controllers
         public ActionResult Index(int id)
         {
             ResultService<SingleEmployeeVM> employee = employeeBLL.GetEmployee(id);
-
+            
             //Login olmus gibi davran ama bunu normalde Login actionda yazman lazım, yani employee başarılı giriş yaptığında bu session lardaki bilgileri sayfalar arası taşıyoruz
-            HttpContext.Session.SetInt32("ID", employee.Data.Id);
-            HttpContext.Session.SetString("FirstName", employee.Data.FirstName);
-            HttpContext.Session.SetString("LastName", employee.Data.LastName);
-            HttpContext.Session.SetString("Title", employee.Data.Title);
-            HttpContext.Session.SetString("Department", employee.Data.Department);
+            //HttpContext.Session.SetInt32("ID", employee.Data.Id);
+            //HttpContext.Session.SetString("FirstName", employee.Data.FirstName);
+            //HttpContext.Session.SetString("LastName", employee.Data.LastName);
+            //HttpContext.Session.SetString("Title", employee.Data.Title);
+            //HttpContext.Session.SetString("Department", employee.Data.Department);
 
 
             ResultService<List<SummaryPermissionVM>> summaryPermission = permissionBLL.GetSumPermission(id);
