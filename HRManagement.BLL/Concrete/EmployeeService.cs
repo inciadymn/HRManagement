@@ -17,6 +17,21 @@ namespace HRManagement.BLL.Concrete
             this.employeeDAL = employeeDAL;
         }
 
+        public ResultService<bool> CheckUserEmail(string email)
+        {
+            ResultService<bool> result = new ResultService<bool>();
+            Employee emp = employeeDAL.Get(a => a.Email == email);
+            if (emp == null)
+            {
+                result.AddError("Login Hatası", "***Böyle bir kullanıcı bulunamadı");
+                result.Data = false;
+                return result;
+            }
+
+            result.Data = true;
+            return result;
+        }
+
         public ResultService<SingleEmployeeVM> GetEmployee(string email, string password)
         {
             ResultService<SingleEmployeeVM> result = new ResultService<SingleEmployeeVM>();

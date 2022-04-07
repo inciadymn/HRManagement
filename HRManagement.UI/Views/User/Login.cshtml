@@ -9,6 +9,9 @@
     .hataMesajıKırmızı {
         color: red;
     }
+    .beyaz{
+        color:snow;
+    }
 </style>
 
 <div>
@@ -19,15 +22,13 @@
         <div class="animate form login_form">
             <section class="login_content">
                 <form asp-action="Login" asp-controller="User" method="post">
-                    <h1>Login Form</h1>
+                    <h1>Giriş Sayfası</h1>
                     <div>
-                        @*<input type="text" class="form-control" placeholder="Username" required="" />*@
-                        <input asp-for="Email" class="form-control" placeholder="e-mail" required>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="e-mail" required>
                         <span asp-validation-for="Email" class="form-text text-muted"></span>
                     </div>
                     <div>
-                        @*<input type="password" class="form-control" placeholder="Password" required="" />*@
-                        <input asp-for="Password" type="text" class="form-control" placeholder="password" required>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="password" required>
                         <span asp-validation-for="Password" class="form-text text-muted"></span>
                     </div>
 
@@ -36,16 +37,16 @@
                         <h6 class="hataMesajıKırmızı">@ViewBag.Message</h6>
                     }
 
-                    <div>
-                        @*<a class="btn btn-default submit">Login</a>*@
-                        <button type="submit" class="btn btn-default mt-30">Login</button>
-                        <a class="reset_pass" href="#">Lost your password?</a>
-                    </div>
+                <div>
+                    <button type="submit" class="btn btn-default mt-30 beyaz">Giriş Yap</button>
+                    <a asp-action="SendMail" asp-controller="User" class="reset_pass">Şifremi Unuttum</a>
+                    @*<a class="reset_pass" href="#">Şifremi unuttum</a>*@
+                </div>
 
                     <div class="clearfix"></div>
 
-                    <div class="separator">
-                        <p class="change_link">
+                    <div class="separator" >
+                        <p class="invisible change_link">
                             New to site?
                             <a href="#signup" class="to_register"> Create Account </a>
                         </p>
@@ -54,45 +55,8 @@
                         <br />
 
                         <div>
-                            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-                        </div>
-                    </div>
-                </form>
-            </section>
-        </div>
-
-        <div id="register" class="animate form registration_form">
-            <section class="login_content">
-                <form>
-                    <h1>Create Account</h1>
-                    <div>
-                        <input type="text" class="form-control" placeholder="Username" required="" />
-                    </div>
-                    <div>
-                        <input type="email" class="form-control" placeholder="Email" required="" />
-                    </div>
-                    <div>
-                        <input type="password" class="form-control" placeholder="Password" required="" />
-                    </div>
-                    <div>
-                        <a class="btn btn-default submit" href="index.html">Submit</a>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="separator">
-                        <p class="change_link">
-                            Already a member ?
-                            <a href="#signin" class="to_register"> Log in </a>
-                        </p>
-
-                        <div class="clearfix"></div>
-                        <br />
-
-                        <div>
-                            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                            <h1><i class="fa fa-paw"></i> HR Management</h1>
+                            <p class="invisible">©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
                         </div>
                     </div>
                 </form>

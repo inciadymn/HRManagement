@@ -19,7 +19,6 @@ namespace HRManagement.UI.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-
             return View();
         }
 
@@ -44,6 +43,48 @@ namespace HRManagement.UI.Controllers
                     return RedirectToAction(nameof(Index), "Employee", new { id = employee.Data.Id });
                 }
             }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult SendMail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SendMail(string email)
+        {
+            if (ModelState.IsValid)
+            {
+                ResultService<bool> result = employeeBLL.CheckUserEmail(email);
+                if (result.HasError)
+                {
+                    ViewBag.Message = result.Errors[0].ErrorMessage;
+                }
+                else
+                {
+                    //random password üret ve mail olarak gönder 
+                    //bu kullanıcı için bu passwordu kaydet db'ye
+                    return RedirectToAction(nameof(UpdatePassword), "User", new { email });
+                }
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult UpdatePassword(string email)
+        {
+            UserResetPasswordVM model = new UserResetPasswordVM();
+            model.Email = email;
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult UpdatePassword(string email, string newPassword, string oldPassword)
+        {
+            //email ve oldPassword un doğruluğunu kontrol et
+            //newPassword u db'ye kaydet, artık yeni şifren bu
             return View();
         }
     }

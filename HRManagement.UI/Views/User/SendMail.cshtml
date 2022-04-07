@@ -1,0 +1,56 @@
+﻿@model UserLoginVM
+
+@{
+    ViewData["Title"] = "SendMail";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<style>
+    .hataMesajıKırmızı {
+        color: red;
+    }
+
+    .beyaz {
+        color: snow;
+    }
+</style>
+
+<div class="login_wrapper">
+    <div class="animate form login_form">
+        <section class="login_content">
+            <form asp-action="SendMail" asp-controller="User" method="post">
+                <h1>E-Mail Gönder</h1>
+                <div>
+                    <input asp-for="Email" type="email" class="form-control" placeholder="e-mail" required>
+                    <span asp-validation-for="Email" class="form-text text-muted"></span>
+                </div>
+
+                @if (ViewBag.Message != null)
+                {
+                    <h6 class="hataMesajıKırmızı">@ViewBag.Message</h6>
+                }
+
+            <div>
+                <button type="submit" class="btn btn-default mt-30 beyaz">Şifre Gönder</button>
+            </div>
+
+                <div class="clearfix"></div>
+
+                <div class="separator">
+                    <p class="invisible change_link">
+                        New to site?
+                        <a href="#signup" class="to_register"> Create Account </a>
+                    </p>
+
+                    <div class="clearfix"></div>
+                    <br />
+
+                    <div>
+                        <h1><i class="fa fa-paw"></i> HR Management</h1>
+                        <p class="invisible">©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

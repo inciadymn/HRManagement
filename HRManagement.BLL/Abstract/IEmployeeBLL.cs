@@ -9,5 +9,6 @@ namespace HRManagement.BLL.Abstract
         ResultService<SingleEmployeeVM> GetEmployee(int id);
         double GetEmployeeSalary(int id);
         ResultService<SingleEmployeeVM> GetEmployee(string email, string password);
+        ResultService<bool> CheckUserEmail(string email);
     }
 }
