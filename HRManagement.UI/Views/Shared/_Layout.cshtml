@@ -4,6 +4,7 @@
     string lastName = ViewContext.HttpContext.Session.GetString("LastName");
     string title = ViewContext.HttpContext.Session.GetString("Title");
     string department = ViewContext.HttpContext.Session.GetString("Department");
+    string userRole = ViewContext.HttpContext.Session.GetString("UserRole");
 }
 
 <!DOCTYPE html>
@@ -233,7 +234,7 @@
                                     @firstName @lastName
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Çıkış </a>    @*LogIn'e gönder.*@
+                                    <a class="dropdown-item" asp-controller="User" asp-action="Login"><i class="fa fa-sign-out pull-right"></i> Çıkış </a>    @*LogIn'e gönder.*@
                                 </div>
                             </li>
 

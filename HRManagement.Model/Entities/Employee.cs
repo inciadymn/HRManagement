@@ -1,4 +1,5 @@
 ﻿using HRManagement.Core.Entity;
+using HRManagement.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace HRManagement.Model.Entities
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
+        public UserRole UserRole { get; set; }
 
         public ICollection<Permission> Permissions { get; set; }
         public ICollection<Advance> Advances { get; set; }

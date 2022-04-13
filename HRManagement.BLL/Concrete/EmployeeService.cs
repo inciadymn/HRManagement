@@ -3,7 +3,6 @@ using HRManagement.BLL.Concrete.ResultServiceBLL;
 using HRManagement.DAL.Abstract;
 using HRManagement.Model.Entities;
 using HRManagement.ViewModel.EmployeeViewModels;
-using HRManagement.ViewModel.UserViewModels;
 using System;
 
 namespace HRManagement.BLL.Concrete
@@ -53,7 +52,8 @@ namespace HRManagement.BLL.Concrete
                 StartDate = emp.StartDate,
                 Id = emp.ID,
                 Title = emp.Title,
-                Department = emp.Department
+                Department = emp.Department,
+                UserRole = emp.UserRole
             };
             return result;
         }
@@ -79,7 +79,8 @@ namespace HRManagement.BLL.Concrete
                 StartDate = emp.StartDate,
                 Id = emp.ID,
                 Title = emp.Title,
-                Department = emp.Department
+                Department = emp.Department,
+                UserRole=emp.UserRole
             };
             return result;
         }

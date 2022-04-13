@@ -1,5 +1,7 @@
 ﻿using HRManagement.BLL.Abstract;
 using HRManagement.BLL.Concrete.ResultServiceBLL;
+using HRManagement.BLL.Concrete.SendMailServiceBLL;
+using HRManagement.ViewModel.AdminViewModels;
 using HRManagement.ViewModel.EmployeeViewModels;
 using HRManagement.ViewModel.UserViewModels;
 using Microsoft.AspNetCore.Http;
@@ -11,9 +13,11 @@ namespace HRManagement.UI.Controllers
     public class UserController : Controller
     {
         IEmployeeBLL employeeBLL;
-        public UserController(IEmployeeBLL employeeBLL)
+        IAdminBLL adminBLL;
+        public UserController(IEmployeeBLL employeeBLL, IAdminBLL adminBLL)
         {
             this.employeeBLL = employeeBLL;
+            this.adminBLL = adminBLL;
         }
 
         [HttpGet]
@@ -30,7 +34,31 @@ namespace HRManagement.UI.Controllers
                 ResultService<SingleEmployeeVM> employee = employeeBLL.GetEmployee(user.Email, user.Password);
                 if (employee.HasError)
                 {
-                    ViewBag.Message = employee.Errors[0].ErrorMessage;
+                    ResultService<AdminInfoVM> admin = adminBLL.GetAdmin(user.Email, user.Password);
+                    if (admin.HasError)
+                    {
+                        ViewBag.Message = employee.Errors[0].ErrorMessage;
+
+                        //manager geldiğinde altaki satırlar dahil edilecek
+                        //ResultService<CompanyManagerVM> companyManager = companyManagerBLL.GetCompanyManager(user.Email, user.Password);
+                        //if (companyManager.HasError)
+                        //{
+                        //    ViewBag.Message = employee.Errors[0].ErrorMessage;
+                        //}
+                        //else
+                        //{
+                        //    return RedirectToAction(nameof(Index), "CompanyManager", new { id = companyManager.Data.Id });
+                        //    //CompanyManager için session ları yaz
+                        //}
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetInt32("ID", admin.Data.ID);
+                        HttpContext.Session.SetString("Name", admin.Data.Name);
+                        HttpContext.Session.SetString("UserRole", admin.Data.UserRole.ToString());
+
+                        return RedirectToAction(nameof(Index), "Admin", new { id = admin.Data.ID });
+                    }
                 }
                 else
                 {
@@ -39,6 +67,7 @@ namespace HRManagement.UI.Controllers
                     HttpContext.Session.SetString("LastName", employee.Data.LastName);
                     HttpContext.Session.SetString("Title", employee.Data.Title);
                     HttpContext.Session.SetString("Department", employee.Data.Department);
+                    HttpContext.Session.SetString("UserRole", employee.Data.UserRole.ToString());
 
                     return RedirectToAction(nameof(Index), "Employee", new { id = employee.Data.Id });
                 }
@@ -64,13 +93,17 @@ namespace HRManagement.UI.Controllers
                 }
                 else
                 {
-                    //random password üret ve mail olarak gönder 
-                    //bu kullanıcı için bu passwordu kaydet db'ye
+                    //Guid id = Guid.NewGuid();
+                    //string password = id.ToString().Substring(0, 8);
+                    //employeeBLL.ChangePassword(userLoginVM, password);
+                    SendMailService.SendMail(email);
+
                     return RedirectToAction(nameof(UpdatePassword), "User", new { email });
                 }
             }
             return View();
         }
+
 
         [HttpGet]
         public IActionResult UpdatePassword(string email)
@@ -85,7 +118,7 @@ namespace HRManagement.UI.Controllers
         {
             //email ve oldPassword un doğruluğunu kontrol et
             //newPassword u db'ye kaydet, artık yeni şifren bu
-            return View();
+            return RedirectToAction(nameof(Login), "User");
         }
     }
 }

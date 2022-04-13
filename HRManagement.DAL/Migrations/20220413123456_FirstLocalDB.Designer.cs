@@ -4,14 +4,16 @@ using HRManagement.DAL.Concrete.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HRManagement.DAL.Migrations
 {
     [DbContext(typeof(HRManagementDbContext))]
-    partial class HRManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220413123456_FirstLocalDB")]
+    partial class FirstLocalDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,9 +73,9 @@ namespace HRManagement.DAL.Migrations
                         {
                             ID = 1,
                             Email = "admin@admin.com",
-                            FirstName = "Gamze",
+                            FirstName = "admin",
                             IsActive = true,
-                            LastName = "Altınelli",
+                            LastName = "admin",
                             Password = "admin",
                             PhoneNumber = "55555555",
                             UserRole = 1
@@ -241,16 +243,16 @@ namespace HRManagement.DAL.Migrations
                         {
                             ID = 1,
                             Address = "Ayrancı mahallesi Gül sokak Kat:3 No:11 Maltepe/İstanbul",
-                            BirthDay = new DateTime(2022, 4, 13, 21, 59, 56, 323, DateTimeKind.Local).AddTicks(4458),
+                            BirthDay = new DateTime(2022, 4, 13, 15, 34, 55, 693, DateTimeKind.Local).AddTicks(7904),
                             Department = "Teknoloji",
-                            Email = "kaanlokum@gmail.com",
-                            FirstName = "Kaan",
-                            LastName = "Lokum",
+                            Email = "inci.adiyaman@hrmanagement.com",
+                            FirstName = "İnci",
+                            LastName = "Adıyaman",
                             Password = "123",
                             PhoneNumber = "05551234567",
                             Photo = "...",
                             Salary = 10000.0,
-                            StartDate = new DateTime(2022, 4, 13, 21, 59, 56, 325, DateTimeKind.Local).AddTicks(537),
+                            StartDate = new DateTime(2022, 4, 13, 15, 34, 55, 695, DateTimeKind.Local).AddTicks(1070),
                             Title = "Yazılım Uzmanı",
                             UserRole = 3
                         });

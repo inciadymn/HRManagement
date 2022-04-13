@@ -24,9 +24,9 @@ namespace HRManagement.BLL.Concrete
             {
                 if (createEmployeeAdvanceVM.AdvanceType == Model.Enums.AdvanceType.Maaş)
                 {
-                    if (createEmployeeAdvanceVM.Price > employeeSalary * 0.3)
+                    if (createEmployeeAdvanceVM.Price > employeeSalary * 0.3 && createEmployeeAdvanceVM.Price <= 0)
                     {
-                        advanceResult.AddError("Yanlış avans talebi", "En fazla maaşınızın %30'unu talep edebilirsiniz.");
+                        advanceResult.AddError("Yanlış avans talebi", $"En fazla maaşınızın {employeeSalary * 0.3}'unu talep edebilirsiniz.");
                         return advanceResult;
                     }
                 }

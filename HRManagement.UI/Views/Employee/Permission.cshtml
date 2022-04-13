@@ -9,6 +9,18 @@
     .izin-ekle{
         color:snow;
     }
+
+    .green{
+        color:limegreen;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .yellow{
+        color: orange;
+    }
 </style>
 
 <body>
@@ -45,16 +57,28 @@
                                     <tbody>
                                         @foreach (EmployeePermissionVM item in Model)
                                         {
-                                            <tr>
-                                                <td>@item.PermissionID</td>
-                                                <td>@item.PermissionType İzni</td>
-                                                <td>@item.NumberOfDaysOff</td>
-                                                <td>@item.Description</td>
-                                                <td>@item.RequestDate.ToString("dd/MM/yyyy")</td>
-                                                <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
-                                                <td>@item.FinishDate.ToString("dd/MM/yyyy")</td>
-                                                <td>@item.PermitStatus</td>
-                                            </tr>
+                                        <tr>
+                                            <td>@item.PermissionID</td>
+                                            <td>@item.PermissionType İzni</td>
+                                            <td>@item.NumberOfDaysOff</td>
+                                            <td>@item.Description</td>
+                                            <td>@item.RequestDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@item.FinishDate.ToString("dd/MM/yyyy")</td>
+                                            @if (item.PermitStatus == PermitStatus.Onaylı)
+                                            {
+                                                <td class="green">@item.PermitStatus</td>
+                                            }
+                                            else if  (item.PermitStatus == PermitStatus.Onaylanmamış)
+                                            {
+                                                <td class="red">@item.PermitStatus</td>
+                                            }
+                                            else if(item.PermitStatus == PermitStatus.Bekleyen)
+                                            {
+                                                <td class="yellow">@item.PermitStatus</td>
+                                            }
+
+                                        </tr>
                                         }
                                     </tbody>
                                 </table>

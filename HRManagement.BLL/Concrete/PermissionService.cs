@@ -38,9 +38,7 @@ namespace HRManagement.BLL.Concrete
                     ReportUrl = fileName,
                     RequestDate = DateTime.Now,
                     PermitStatus = Model.Enums.PermitStatus.Onaylanmamış
-
                 });
-
 
                 if (permission == null)
                 {

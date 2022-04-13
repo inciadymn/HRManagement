@@ -13,19 +13,22 @@ namespace HRManagement.DAL.Concrete.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=tcp:hrmanagement.database.windows.net,1433;Initial Catalog=HRManagement;Persist Security Info=False;User ID=HrManagement;Password=Giresun2861;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;");
+            optionsBuilder.UseSqlServer("Server=.;Database=HRManagement;uid=sa;pwd=as");
         }
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Permission> Permission { get; set; }
         public DbSet<Advance> Advances { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Company> Companies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
             modelBuilder.ApplyConfiguration(new PermissionConfiguration());
             modelBuilder.ApplyConfiguration(new AdvanceConfiguration());
-            
+            modelBuilder.ApplyConfiguration(new AdminConfiguration());
+            modelBuilder.ApplyConfiguration(new CompanyConfiguration());
         }
     }
 }

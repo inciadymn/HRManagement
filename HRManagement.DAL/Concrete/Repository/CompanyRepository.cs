@@ -5,9 +5,9 @@ using HRManagement.Model.Entities;
 
 namespace HRManagement.DAL.Concrete.Repository
 {
-    class EmployeeRepository : EFRepositoryBase<Employee, HRManagementDbContext>, IEmployeeDAL
+    class CompanyRepository : EFRepositoryBase<Company, HRManagementDbContext>, ICompanyDAL
     {
-        public EmployeeRepository(HRManagementDbContext context) : base(context)
+        public CompanyRepository(HRManagementDbContext context) : base(context)
         {
 
         }

@@ -51,9 +51,9 @@ namespace HRManagement.DAL.Concrete.Context.EntityTypeConfiguration
             builder.HasData(new Employee
             {
                 ID = 1,
-                FirstName = "İnci",
-                LastName = "Adıyaman",
-                Email = "inci.adiyaman@hrmanagement.com",
+                FirstName = "Kaan",
+                LastName = "Lokum",
+                Email = "kaanlokum@gmail.com",
                 Password = "123",
                 Address = "Ayrancı mahallesi Gül sokak Kat:3 No:11 Maltepe/İstanbul",
                 BirthDay = DateTime.Now,
@@ -62,8 +62,8 @@ namespace HRManagement.DAL.Concrete.Context.EntityTypeConfiguration
                 StartDate = DateTime.Now,
                 Department="Teknoloji",
                 Salary = 10000,
-                Title ="Yazılım Uzmanı"
-                
+                Title ="Yazılım Uzmanı",
+                UserRole= Model.Enums.UserRole.Employee
             });
         }
     }

@@ -6,6 +6,24 @@
     var sumPer = ViewBag.sumPermision;
     var sumAdv = ViewBag.sumAdvance;
 }
+
+
+<style>
+
+    .green {
+        color: limegreen;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .yellow {
+        color: orange;
+    }
+</style>
+
+
 <div class="row">
 
     @*Çalışan Bilgileri Başlangıç*@
@@ -22,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-9">
-                    <h3>İnci Adıyaman</h3>
+                    <h3>@Model.FirstName @Model.LastName</h3>
 
                     <ul class="list-unstyled user_data">
                         <li>
@@ -40,7 +58,7 @@
                         </li>
                     </ul>
                     <br />
-                    <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                    <a class="invisible btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
                     <br>
 
 
@@ -95,13 +113,25 @@
 
                                                         @foreach (var item in sumPer)
                                                         {
-                                                            <tr>
-                                                                <td class="sorting_1">@item.PermissionID</td>
-                                                                <td>@item.PermissionType</td>
-                                                                <td>@item.NumberOfDaysOff</td>
-                                                                <td>@item.RequestDate.ToString("dd/MM/yyyy")</td>
-                                                                <td>@item.PermitStatus</td>
-                                                            </tr>
+                                                        <tr>
+                                                            <td class="sorting_1">@item.PermissionID</td>
+                                                            <td>@item.PermissionType</td>
+                                                            <td>@item.NumberOfDaysOff</td>
+                                                            <td>@item.RequestDate.ToString("dd/MM/yyyy")</td>
+
+                                                            @if (item.PermitStatus == PermitStatus.Onaylı)
+                                                            {
+                                                                <td class="green">@item.PermitStatus</td>
+                                                            }
+                                                            else if (item.PermitStatus == PermitStatus.Onaylanmamış)
+                                                            {
+                                                                <td class="red">@item.PermitStatus</td>
+                                                            }
+                                                            else if (item.PermitStatus == PermitStatus.Bekleyen)
+                                                            {
+                                                                <td class="yellow">@item.PermitStatus</td>
+                                                            }
+                                                        </tr>
                                                         }
                                                     </tbody>
                                                 </table>

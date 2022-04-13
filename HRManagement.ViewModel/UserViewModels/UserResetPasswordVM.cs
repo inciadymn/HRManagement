@@ -9,6 +9,7 @@ namespace HRManagement.ViewModel.UserViewModels
 {
     public class UserResetPasswordVM
     {
+        public int ID { get; set; }
         public string Email { get; set; }
 
         [DataType(DataType.Password)]
