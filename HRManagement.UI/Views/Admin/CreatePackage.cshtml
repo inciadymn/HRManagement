@@ -1,8 +1,114 @@
-﻿
+﻿@model PackageVM
+
 @{
     ViewData["Title"] = "CreatePackage";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>CreatePackage</h2>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="x_panel">
+            @*<div class="x_title">
+                    <h2>Form validation <small>sub title</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Settings 1</a>
+                                <a class="dropdown-item" href="#">Settings 2</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>*@
+            <div class="x_content">
+                <form asp-action="CreatePackage" asp-controller="Admin" method="post" novalidate>
+                 
+                    <span class="section">Paket Ekle</span>
+                    <div class="field item form-group">
+                        <label asp-for="Name" class="col-form-label col-md-3 col-sm-3  label-align">Paket İsmi<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input asp-for="Name" class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" required="required" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="field item form-group">
+
+                        <label asp-for="Price" class="col-form-label col-md-3 col-sm-3  label-align">Paket Fiyatı<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input asp-for="Price" class="form-control" type="number"  />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="field item form-group">
+                        <label asp-for="StartDate" class="col-form-label col-md-3 col-sm-3  label-align">Başlangıç Tarihi<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input asp-for="StartDate" class="form-control"  required="required" type="date" />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="field item form-group">
+                        <label asp-for="EndDate" class="col-form-label col-md-3 col-sm-3  label-align">Bitiş Tarihi<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input asp-for="EndDate" class="form-control" type="date" required='required'>
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="field item form-group">
+                        <label asp-for="Duration" class="col-form-label col-md-3 col-sm-3  label-align">Kullanım Süresi<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input asp-for="Duration" class="form-control" type="number" required='required'>
+                            <span asp-validation-for="Duration" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="field item form-group">
+                        <label asp-for="UserNumber" class="col-form-label col-md-3 col-sm-3  label-align">Kullanıcı Numarası<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input asp-for="UserNumber" class="form-control"   type="number" />
+                            <span asp-validation-for="UserNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="field item form-group">
+                        <label asp-for="ImageURL" class="col-form-label col-md-3 col-sm-3  label-align">Resim<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input asp-for="ImageURL" class="form-control"  type="file" />
+                            <span asp-validation-for="ImageURL" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    @*<div class="input-group">
+                            <label asp-for="ImageURL" class="control-label">Resim</label>
+                            <input asp-for="ImageURL" class="input--style-4" />
+                            <span asp-validation-for="ImageURL" class="text-danger"></span>
+                        </div>*@
+
+                    @*<div class="field item form-group">
+                        <label asp-for="CompanyType" class="col-form-label col-md-3 col-sm-3  label-align control-label">Şirket Ünvanı<span class="required">*</span></label>
+                        <select asp-for="CompanyType" class="form-control" asp-items="Html.GetEnumSelectList<CompanyType>()"></select>
+                        <span asp-validation-for="CompanyType" class="text-danger"></span>
+                    </div>*@
+
+                    
+                    <div class="ln_solid">
+                        <div class="form-group">
+                            <div class="col-md-6 offset-md-3">
+                                <button type='submit' class="btn btn-primary">Paketi Kaydet</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 

@@ -13,7 +13,7 @@ namespace HRManagement.DAL.Concrete.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=HRManagement;uid=sa;pwd=as");
+            optionsBuilder.UseSqlServer("Server = .; Database = HRManagement; uid=sa;pwd=as");
         }
 
         public DbSet<Employee> Employees { get; set; }
@@ -21,6 +21,7 @@ namespace HRManagement.DAL.Concrete.Context
         public DbSet<Advance> Advances { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<Package> Packages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,6 +30,7 @@ namespace HRManagement.DAL.Concrete.Context
             modelBuilder.ApplyConfiguration(new AdvanceConfiguration());
             modelBuilder.ApplyConfiguration(new AdminConfiguration());
             modelBuilder.ApplyConfiguration(new CompanyConfiguration());
+            modelBuilder.ApplyConfiguration(new PackageConfiguration());
         }
     }
 }

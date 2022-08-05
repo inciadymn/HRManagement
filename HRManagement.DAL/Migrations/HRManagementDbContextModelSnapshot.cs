@@ -166,6 +166,8 @@ namespace HRManagement.DAL.Migrations
 
                     b.HasIndex("AdminID");
 
+                    b.HasIndex("PackageId");
+
                     b.ToTable("Companies");
                 });
 
@@ -241,7 +243,7 @@ namespace HRManagement.DAL.Migrations
                         {
                             ID = 1,
                             Address = "Ayrancı mahallesi Gül sokak Kat:3 No:11 Maltepe/İstanbul",
-                            BirthDay = new DateTime(2022, 4, 13, 21, 59, 56, 323, DateTimeKind.Local).AddTicks(4458),
+                            BirthDay = new DateTime(2022, 4, 20, 23, 42, 49, 19, DateTimeKind.Local).AddTicks(2943),
                             Department = "Teknoloji",
                             Email = "kaanlokum@gmail.com",
                             FirstName = "Kaan",
@@ -250,10 +252,49 @@ namespace HRManagement.DAL.Migrations
                             PhoneNumber = "05551234567",
                             Photo = "...",
                             Salary = 10000.0,
-                            StartDate = new DateTime(2022, 4, 13, 21, 59, 56, 325, DateTimeKind.Local).AddTicks(537),
+                            StartDate = new DateTime(2022, 4, 20, 23, 42, 49, 21, DateTimeKind.Local).AddTicks(1510),
                             Title = "Yazılım Uzmanı",
                             UserRole = 3
                         });
+                });
+
+            modelBuilder.Entity("HRManagement.Model.Entities.Package", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("Date");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("Date");
+
+                    b.Property<int>("UserNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Packages");
                 });
 
             modelBuilder.Entity("HRManagement.Model.Entities.Permission", b =>
@@ -320,7 +361,13 @@ namespace HRManagement.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HRManagement.Model.Entities.Package", "Package")
+                        .WithMany("Companies")
+                        .HasForeignKey("PackageId");
+
                     b.Navigation("Admin");
+
+                    b.Navigation("Package");
                 });
 
             modelBuilder.Entity("HRManagement.Model.Entities.Permission", b =>
@@ -344,6 +391,11 @@ namespace HRManagement.DAL.Migrations
                     b.Navigation("Advances");
 
                     b.Navigation("Permissions");
+                });
+
+            modelBuilder.Entity("HRManagement.Model.Entities.Package", b =>
+                {
+                    b.Navigation("Companies");
                 });
 #pragma warning restore 612, 618
         }

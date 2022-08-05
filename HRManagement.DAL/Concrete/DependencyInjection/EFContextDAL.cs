@@ -20,6 +20,7 @@ namespace HRManagement.DAL.Concrete.DependencyInjection
             services.AddScoped<IAdvanceDAL, AdvanceRepository>();
             services.AddScoped<IAdminDAL, AdminRepository>();
             services.AddScoped<ICompanyDAL, CompanyRepository>();
+            services.AddScoped<IPackageDAL, PackageRepository>();
         }
     }
 }

@@ -14,9 +14,11 @@ namespace HRManagement.BLL.Concrete
     public class CompanyService : ICompanyBLL
     {
         ICompanyDAL companyDAL;
-        public CompanyService(ICompanyDAL companyDAL)
+        IPackageDAL packageRepository ;
+        public CompanyService(ICompanyDAL companyDAL, IPackageDAL packageRepository)
         {
             this.companyDAL = companyDAL;
+            this.packageRepository = packageRepository;
         }
 
         public ResultService<bool> AddCompany(CompanyVM company)
@@ -35,13 +37,16 @@ namespace HRManagement.BLL.Concrete
                             ImageUrl = company.ImageURL,
                             MailExtension = company.MailExtension,
                             TaxId = company.TaxId,
+                            PackageId =packageRepository.Get(a => a.Name == company.PackageId).ID,
                             PhoneNumber = company.PhoneNumber,
                             RegisterDate = company.RegisterDate,
-                            DatePurchased = company.DatePurchased
+                            DatePurchased = company.DatePurchased,
+                            AdminID=company.AdminId
                         });
                     result.Data = true;
                     return result;
                 }
+               
             }
             catch (Exception)
             {

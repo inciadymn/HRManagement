@@ -42,6 +42,8 @@ namespace HRManagement.DAL.Concrete.Context.EntityTypeConfiguration
             builder.HasOne(a => a.Admin)
                    .WithMany(a => a.Companies)
                    .HasForeignKey(a => a.AdminID);
+
+            builder.HasOne(a => a.Package).WithMany(a => a.Companies).HasForeignKey(a => a.PackageId);
         }
     }
 }

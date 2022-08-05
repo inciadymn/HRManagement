@@ -1,12 +1,15 @@
 ﻿using HRManagement.BLL.Abstract;
 using HRManagement.BLL.Concrete.ResultServiceBLL;
 using HRManagement.BLL.Concrete.SendMailServiceBLL;
+using HRManagement.Model.Entities;
 using HRManagement.ViewModel.AdminViewModels;
 using HRManagement.ViewModel.EmployeeViewModels;
 using HRManagement.ViewModel.UserViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace HRManagement.UI.Controllers
 {
@@ -19,6 +22,13 @@ namespace HRManagement.UI.Controllers
             this.employeeBLL = employeeBLL;
             this.adminBLL = adminBLL;
         }
+
+        //readonly UserManager<Employee> userManager;    //Employee --> AppUser --> AspNetCore.Identiy
+        //public UserController(UserManager<Employee> _userManager)
+        //{
+        //    userManager = _userManager;
+        //}
+
 
         [HttpGet]
         public IActionResult Login()
@@ -82,23 +92,22 @@ namespace HRManagement.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult SendMail(string email)
+        public IActionResult SendMail(SingleEmployeeVM singleEmployeeVM) 
         {
             if (ModelState.IsValid)
             {
-                ResultService<bool> result = employeeBLL.CheckUserEmail(email);
+                ResultService<bool> result = employeeBLL.CheckUserEmail(singleEmployeeVM.Email); //Sadece Employee için olmasın -> Employe, Admin, Manager... 3ünü kapsayan giriş ve post
                 if (result.HasError)
                 {
                     ViewBag.Message = result.Errors[0].ErrorMessage;
                 }
                 else
                 {
-                    //Guid id = Guid.NewGuid();
-                    //string password = id.ToString().Substring(0, 8);
-                    //employeeBLL.ChangePassword(userLoginVM, password);
-                    SendMailService.SendMail(email);
-
-                    return RedirectToAction(nameof(UpdatePassword), "User", new { email });
+                    Guid id = Guid.NewGuid();
+                    string password = id.ToString().Substring(0, 8);
+                    employeeBLL.MailChangePassword(singleEmployeeVM, password);
+                    SendMailService.SendMail(singleEmployeeVM.Email, password);  
+                    return RedirectToAction(nameof(UpdatePassword), "User", new { singleEmployeeVM.Email });
                 }
             }
             return View();
@@ -113,11 +122,15 @@ namespace HRManagement.UI.Controllers
             return View(model);
         }
 
+
         [HttpPost]
-        public IActionResult UpdatePassword(string email, string newPassword, string oldPassword)
+        public IActionResult UpdatePassword(UserResetPasswordVM user)
         {
-            //email ve oldPassword un doğruluğunu kontrol et
-            //newPassword u db'ye kaydet, artık yeni şifren bu
+            if (ModelState.IsValid)
+            {
+                employeeBLL.ChangePassword(user);
+            }
+
             return RedirectToAction(nameof(Login), "User");
         }
     }

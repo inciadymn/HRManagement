@@ -10,16 +10,16 @@ namespace HRManagement.BLL.Concrete.SendMailServiceBLL
 {
     public class SendMailService
     {
-        public static bool SendMail(string userMailAdress)
+        public static bool SendMail(string userMailAdress, string password)
         {
             MailMessage message = new MailMessage();
             SmtpClient smtp = new SmtpClient();
 
-            message.From = new MailAddress("redteamproject@outlook.com");    //Şirketin bir mail adresi olmalı --> Buraya Örn. bir adres yazdım.    
+            message.From = new MailAddress("hrmanagementsp1@outlook.com");    //Şirketin bir mail adresi olmalı --> Buraya Örn. bir adres yazdım.    
             message.To.Add(userMailAdress);
             message.Subject = "Şifremi Unuttum - Şifre Değiştirme Maili";
             message.IsBodyHtml = true;
-            message.Body = string.Format("<!DOCTYPE html> <html> <head> <meta charset='utf-8'/> <title></title> </head> <body> <h1> Şifre Değiştirme Maili </h1> <p> Merhaba </p> <p> Şifrenizi unuttuğunuz için size bu mail gönderildi. </p> <br /> <p> Şifrenizi değiştirmek için <a href='https://hrmanagementproject.azurewebsites.net/User/ChangePassword'> bu linke tıklayınız. </p> </body> </html>");
+            message.Body = string.Format($"<h1 style='font-size:28px;font-weight:300;line-height:150%;margin:0;text-align:center;color:black;background-color:inherit'>Merhabalar</h1>Değerli kullanıcımız şifreniz değiştirilmiştir.<br/> Şifreniz {password}");
 
             // message.Body'deki href'de verilen url link uzantısı henüz oluşturulmadı.
 
@@ -27,7 +27,7 @@ namespace HRManagement.BLL.Concrete.SendMailServiceBLL
             smtp.Host = "smtp.office365.com"; // --smtp.radorehosting.com-- Gmail için --> smtp.Host = "smtp.gmail.com"; --- smtp.Host = "smtp.live.com";  //gmail veya hotmail için host için --> Dene????
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential("redteamproject@outlook.com", "123toci123");   //Mail adresi ve şifre henüz oluşturulmadı. Ör. olarak yazdım.
+            smtp.Credentials = new NetworkCredential("hrmanagementsp1@outlook.com", "HR.man123");   //Mail adresi ve şifre henüz oluşturulmadı. Ör. olarak yazdım.
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
             try

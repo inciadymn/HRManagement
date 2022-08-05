@@ -24,11 +24,15 @@ namespace HRManagement.Model.Entities
         public string TaxId { get; set; }
         public string? ImageUrl { get; set; }
         public CompanyType CompanyType { get; set; }
-        public int? PackageId { get; set; }
-        //public Package Package { get; set; }  //paketler gelince kaldır yorumu
+      
 
         public int AdminID { get; set; }
         public Admin Admin { get; set; }
-       
+
+        public int? PackageId { get; set; }
+        public Package Package { get; set; }  //paketler gelince kaldır yorumu
+
+
+
     }
 }

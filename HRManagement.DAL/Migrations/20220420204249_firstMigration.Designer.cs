@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManagement.DAL.Migrations
 {
     [DbContext(typeof(HRManagementDbContext))]
-    [Migration("20220331080842_employeSalary")]
-    partial class employeSalary
+    [Migration("20220420204249_firstMigration")]
+    partial class firstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,67 @@ namespace HRManagement.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("HRManagement.Model.Entities.Admin", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(18)
+                        .HasColumnType("nvarchar(18)");
+
+                    b.Property<int>("UserRole")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Email = "admin@admin.com",
+                            FirstName = "Gamze",
+                            IsActive = true,
+                            LastName = "Altınelli",
+                            Password = "admin",
+                            PhoneNumber = "55555555",
+                            UserRole = 1
+                        });
+                });
 
             modelBuilder.Entity("HRManagement.Model.Entities.Advance", b =>
                 {
@@ -55,6 +116,61 @@ namespace HRManagement.DAL.Migrations
                     b.HasIndex("EmployeeID");
 
                     b.ToTable("Advances");
+                });
+
+            modelBuilder.Entity("HRManagement.Model.Entities.Company", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("AdminID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("CompanyType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DatePurchased")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MailExtension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PackageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<DateTime>("RegisterDate")
+                        .HasColumnType("Date");
+
+                    b.Property<string>("TaxId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AdminID");
+
+                    b.HasIndex("PackageId");
+
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("HRManagement.Model.Entities.Employee", b =>
@@ -114,6 +230,9 @@ namespace HRManagement.DAL.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserRole")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.HasIndex("Email")
@@ -126,18 +245,58 @@ namespace HRManagement.DAL.Migrations
                         {
                             ID = 1,
                             Address = "Ayrancı mahallesi Gül sokak Kat:3 No:11 Maltepe/İstanbul",
-                            BirthDay = new DateTime(2022, 3, 31, 11, 8, 42, 177, DateTimeKind.Local).AddTicks(1541),
+                            BirthDay = new DateTime(2022, 4, 20, 23, 42, 49, 19, DateTimeKind.Local).AddTicks(2943),
                             Department = "Teknoloji",
-                            Email = "inci.adiyaman@hrmanagement.com",
-                            FirstName = "İnci",
-                            LastName = "Adıyaman",
+                            Email = "kaanlokum@gmail.com",
+                            FirstName = "Kaan",
+                            LastName = "Lokum",
                             Password = "123",
                             PhoneNumber = "05551234567",
                             Photo = "...",
                             Salary = 10000.0,
-                            StartDate = new DateTime(2022, 3, 31, 11, 8, 42, 178, DateTimeKind.Local).AddTicks(5624),
-                            Title = "Developer"
+                            StartDate = new DateTime(2022, 4, 20, 23, 42, 49, 21, DateTimeKind.Local).AddTicks(1510),
+                            Title = "Yazılım Uzmanı",
+                            UserRole = 3
                         });
+                });
+
+            modelBuilder.Entity("HRManagement.Model.Entities.Package", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("Date");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("Date");
+
+                    b.Property<int>("UserNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Packages");
                 });
 
             modelBuilder.Entity("HRManagement.Model.Entities.Permission", b =>
@@ -196,6 +355,23 @@ namespace HRManagement.DAL.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("HRManagement.Model.Entities.Company", b =>
+                {
+                    b.HasOne("HRManagement.Model.Entities.Admin", "Admin")
+                        .WithMany("Companies")
+                        .HasForeignKey("AdminID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HRManagement.Model.Entities.Package", "Package")
+                        .WithMany("Companies")
+                        .HasForeignKey("PackageId");
+
+                    b.Navigation("Admin");
+
+                    b.Navigation("Package");
+                });
+
             modelBuilder.Entity("HRManagement.Model.Entities.Permission", b =>
                 {
                     b.HasOne("HRManagement.Model.Entities.Employee", "Employee")
@@ -207,11 +383,21 @@ namespace HRManagement.DAL.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("HRManagement.Model.Entities.Admin", b =>
+                {
+                    b.Navigation("Companies");
+                });
+
             modelBuilder.Entity("HRManagement.Model.Entities.Employee", b =>
                 {
                     b.Navigation("Advances");
 
                     b.Navigation("Permissions");
+                });
+
+            modelBuilder.Entity("HRManagement.Model.Entities.Package", b =>
+                {
+                    b.Navigation("Companies");
                 });
 #pragma warning restore 612, 618
         }

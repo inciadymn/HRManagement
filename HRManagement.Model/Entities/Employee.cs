@@ -30,6 +30,8 @@ namespace HRManagement.Model.Entities
         public string Address { get; set; }
         public UserRole UserRole { get; set; }
 
+        //public bool IsActive { get; set; }  // Şifre değişikliği için ekleyebiliriz?
+
         public ICollection<Permission> Permissions { get; set; }
         public ICollection<Advance> Advances { get; set; }
     }

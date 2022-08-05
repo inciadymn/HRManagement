@@ -29,65 +29,118 @@
 </style>
 
 <body>
-    <form asp-action="CreatePermission" asp-controller="Employee" method="post" enctype="multipart/form-data">
-        @* enctype bunu Report adı gelsin diye yazılmalı *@
-        <div class="form-group top">
-            <div class="invisible item">
-                <label asp-for="EmployeeID">
-                    <input asp-for="EmployeeID" value=@id class="form-control" />
-                </label>
-            </div>
+    @*<div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <form asp-action="CreatePermission" asp-controller="Employee" method="post" novalidate>
+                        <div class="invisible item">
+                            <label asp-for="EmployeeID">
+                                <input asp-for="EmployeeID" value=@id class="form-control" />
+                            </label>
+                        </div>
+                        <span class="section">İzin Ekle</span>
+                        <div class="field item form-group">
+                            <label asp-for="StartDate" class="col-form-label col-md-3 col-sm-3  label-align">Başlangıç Tarihi<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input asp-for="StartDate" class="form-control" class='date' type="date" name="date" required='required'>
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                        </div>
 
-            <div class="item">
-                <label asp-for="StartDate"> <b>Başlangıç Tarihi</b> </label>
-                <input asp-for="StartDate" type="date" class="form-control" required />
-                <span asp-validation-for="StartDate" class="text-danger" ></span>
-            </div>
+                        <div class="field item form-group">
+                            <label asp-for="FinishDate" class="col-form-label col-md-3 col-sm-3  label-align">Bitiş Tarihi<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input asp-for="FinishDate" class="form-control" class='date' type="date" name="date" required='required'>
+                                <span asp-validation-for="FinishDate" class="text-danger"></span>
+                            </div>
+                        </div>
 
-            <div class="item">
-                <label asp-for="FinishDate"> <b>Bitiş Tarihi</b> </label>
-                <input asp-for="FinishDate" type="date" class="form-control" required />
-                <span asp-validation-for="FinishDate" class="text-danger"></span>
-            </div>
+                        @if (ViewBag.Message != null)
+                        {
+                            <h6 class="hataMesajıKırmızı">@ViewBag.Message</h6>
+                        }
 
-            @if (ViewBag.Message != null)
-            {
-                <h6 class="hataMesajıKırmızı">@ViewBag.Message</h6>
-            }
+                        <div class="field item form-group">
+                            <label asp-for="Description" class="col-form-label col-md-3 col-sm-3  label-align">Açıklama<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <textarea asp-for="Description" required="required" name='message' placeholder="Açıklama giriniz..."></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
 
-            <div class="item">
-                <label asp-for="Description"><b>Açıklama</b></label>
-                <textarea asp-for="Description" class="form-control" placeholder="Açıklama giriniz..."></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
+                        <div class="field item form-group">
+                            <label asp-for="PermissionType" class="col-form-label col-md-3 col-sm-3  label-align control-label">İzin Türü <span class="required">*</span></label>
+                            <select asp-for="PermissionType" class="form-control" asp-items="Html.GetEnumSelectList<PermissionType>()"></select>
+                            <span asp-validation-for="PermissionType" class="text-danger"></span>
+                        </div>
 
-            @*<label asp-for="PermissionType"></label>
-            <select asp-for="PermissionType" class="form-control">
-                <option >YillikIzin</option>
-                <option >DogumIzni</option>
-                <option >BabalikIzni</option>
-                <option >EvlilikIzni</option>
-                <option >HastalikIzni</option>
-                <option >VefatIzni</option>
-                <option >UcretsizIzin</option>
-                <option >TasinmaIzni</option>
-            </select>*@
+                        <div class="item">
+                            <input asp-for="Report" type="file" accept=".pdf" />
+                        </div>
 
-            <div class="item">
-                <label asp-for="PermissionType"> <b>İzin Türü</b> </label>
-                <select asp-for="PermissionType" asp-items="Html.GetEnumSelectList<PermissionType>()" class="form-control"> </select>
-                <span asp-validation-for="PermissionType" class="text-danger"></span>
-            </div>
-
-            <div class="item">
-                <input asp-for="Report" type="file" accept=".pdf" />
-            </div>
-
-            <div class="item">
-                <button class="btn btn-primary btn-lg" type="submit"><b>İzin Ekle</b></button>
+                        <div class="ln_solid">
+                            <div class="form-group">
+                                <div class="col-md-6 offset-md-3">
+                                    <button type='submit' class="btn btn-primary">İzin Ekle</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </form>
+    </div>*@
+
+
+
+    @* ************************* Eski form ************************* *@
+    <form  method="post" enctype="multipart/form-data">
+            <div class="form-group top">
+                <div class="invisible item">
+                    <label asp-for="EmployeeID">
+                        <input asp-for="EmployeeID" value=@id class="form-control" />
+                    </label>
+                </div>
+
+                <div class="item">
+                    <label asp-for="StartDate"> <b>Başlangıç Tarihi</b> </label>
+                    <input asp-for="StartDate" type="date" class="form-control" required />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+
+                <div class="item">
+                    <label asp-for="FinishDate"> <b>Bitiş Tarihi</b> </label>
+                    <input asp-for="FinishDate" type="date" class="form-control" required />
+                    <span asp-validation-for="FinishDate" class="text-danger"></span>
+                </div>
+
+                @if (ViewBag.Message != null)
+                {
+                    <h6 class="hataMesajıKırmızı">@ViewBag.Message</h6>
+                }
+
+                <div class="item">
+                    <label asp-for="Description"><b>Açıklama</b></label>
+                    <textarea asp-for="Description" class="form-control" placeholder="Açıklama giriniz..."></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="item">
+                    <label asp-for="PermissionType"> <b>İzin Türü</b> </label>
+                    <select asp-for="PermissionType" asp-items="Html.GetEnumSelectList<PermissionType>()" class="form-control"> </select>
+                    <span asp-validation-for="PermissionType" class="text-danger"></span>
+                </div>
+
+                <div class="item">
+                    <input asp-for="Report" type="file" accept=".pdf" />
+                </div>
+
+                <div class="item">
+                    <button class="btn btn-primary btn-lg" type="submit"><b>İzin Ekle</b></button>
+                </div>
+            </div>
+        </form>
 
     @*bootstrapv4*@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C  +OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

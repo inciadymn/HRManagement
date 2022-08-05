@@ -19,6 +19,7 @@ namespace HRManagement.BLL.Concrete.DependencyInjection
             services.AddScoped<IAdvanceBLL, AdvanceService>();
             services.AddScoped<IAdminBLL, AdminService>();
             services.AddScoped<ICompanyBLL, CompanyService>();
+            services.AddScoped<IPackageBLL, PackageService>();
         }
     }
 }

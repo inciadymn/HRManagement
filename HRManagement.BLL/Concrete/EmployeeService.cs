@@ -3,6 +3,7 @@ using HRManagement.BLL.Concrete.ResultServiceBLL;
 using HRManagement.DAL.Abstract;
 using HRManagement.Model.Entities;
 using HRManagement.ViewModel.EmployeeViewModels;
+using HRManagement.ViewModel.UserViewModels;
 using System;
 
 namespace HRManagement.BLL.Concrete
@@ -14,6 +15,53 @@ namespace HRManagement.BLL.Concrete
         public EmployeeService(IEmployeeDAL employeeDAL)
         {
             this.employeeDAL = employeeDAL;
+        }
+
+        public bool ChangePassword(UserResetPasswordVM userResetPassword )
+        {
+
+            Employee employee = employeeDAL.Get(a => a.Email == userResetPassword.Email);
+            if (employee != null)
+            {
+                if (employee.Password == userResetPassword.CurrentPassword)
+                {
+                    if (userResetPassword.NewPassword == userResetPassword.ConfirmPassword)
+                    {
+                        employee.Password = userResetPassword.NewPassword;
+                        employeeDAL.Update(employee);
+                        return true;
+                    }
+                    else
+                    {
+                        throw new Exception("Girdiğiniz şifreler uyuşmamaktadır.");
+                    }
+
+                }
+                else
+                {
+                    throw new Exception("Girilen şifre yanlıştır.Lütfen tekrar deneyiniz");
+                }
+            }
+            else
+            {
+                throw new Exception("Bir hata oluştu");
+            }
+        }
+
+        public bool MailChangePassword(SingleEmployeeVM singleEmployee, string password)  //User Genelinde olmalı --> Employe, Admin, Manager --> 3'ü içinde --> UserService
+        {
+            if (employeeDAL != null || password != null)
+            {
+
+                Employee passChangeUser = employeeDAL.Get(a => a.Email == singleEmployee.Email);
+                passChangeUser.Password = password;
+                //passChangeUser.IsActive = false;
+                passChangeUser = employeeDAL.Update(passChangeUser);
+
+                return true;
+
+            }
+            return false;
         }
 
         public ResultService<bool> CheckUserEmail(string email)

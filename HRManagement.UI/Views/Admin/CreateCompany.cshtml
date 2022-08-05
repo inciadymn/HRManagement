@@ -1,8 +1,99 @@
-﻿
+﻿@model CompanyVM
+
 @{
     ViewData["Title"] = "CreateCompany";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    int id = ViewContext.HttpContext.Session.GetInt32("ID").Value;
 }
 
-<h2>CreateCompany</h2>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <form asp-action="CreateCompany" asp-controller="Admin" method="post" novalidate>
+                        <div class="invisible item">
+                            <label asp-for="AdminId">
+                                <input asp-for="AdminId" value=@id class="form-control" />
+                            </label>
+                        </div>
+
+                        <span class="section">Şirket Ekle</span>
+                        <div class="field item form-group">
+                            <label asp-for="Name" class="col-form-label col-md-3 col-sm-3  label-align">Şirket İsmi<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input asp-for="Name" class="form-control" required="required" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+
+                            <label asp-for="TaxId" class="col-form-label col-md-3 col-sm-3  label-align">Vergi Numarası<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input asp-for="TaxId" class="form-control" type="number" required='required' />
+                                <span asp-validation-for="TaxId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+                            <label asp-for="MailExtension" class="col-form-label col-md-3 col-sm-3  label-align">Mail Adresi<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input asp-for="MailExtension" class="form-control" required="required" type="email" />
+                                <span asp-validation-for="MailExtension" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+                            <label asp-for="RegisterDate" class="col-form-label col-md-3 col-sm-3  label-align">Kuruluş Tarihi<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input asp-for="RegisterDate" class="form-control" required='required' type="date">
+                                <span asp-validation-for="RegisterDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+                            <label asp-for="DatePurchased" class="col-form-label col-md-3 col-sm-3  label-align">Paket Satınalma Tarihi<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input asp-for="DatePurchased" class="form-control" type="date" required='required'>
+                                <span asp-validation-for="DatePurchased" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        @*<div class="field item form-group">
+                            <label asp-for="AdminId" class="col-form-label col-md-3 col-sm-3  label-align">Kullanıcı Numarası<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input asp-for="AdminId" class="form-control" type="number" required='required' />
+                                <span asp-validation-for="AdminId" class="text-danger"></span>
+                            </div>
+                        </div>*@
+
+                        <div class="field item form-group">
+                            <label asp-for="CompanyType" class="col-form-label col-md-3 col-sm-3  label-align control-label">Şirket Ünvanı<span class="required">*</span></label>
+                            <select asp-for="CompanyType" class="form-control" asp-items="Html.GetEnumSelectList<CompanyType>()"></select>
+                            <span asp-validation-for="CompanyType" class="text-danger"></span>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label asp-for="PackageId" class="col-form-label col-md-3 col-sm-3  label-align control-label">Satın Alınan Paket</label>
+                            <select asp-for="PackageId" class="form-control" asp-items="@(new SelectList(ViewBag.Packages))" ></select>
+                            <span asp-validation-for="PackageId" class="text-danger"></span>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label asp-for="Address" class="col-form-label col-md-3 col-sm-3  label-align">Şirket Adresi<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <textarea asp-for="Address" required="required"></textarea>
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid">
+                            <div class="form-group">
+                                <div class="col-md-6 offset-md-3">
+                                    <button type='submit' class="btn btn-primary">Şirketi Kaydet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
